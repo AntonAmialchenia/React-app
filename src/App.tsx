@@ -24,8 +24,12 @@ function App() {
 
   const sortPosts = (sort: string) => {
     setSelectedSort(sort);
+    console.log(sort);
 
-    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
+    if (sort === 'title' || sort === 'body') {
+      setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
+      console.log(posts);
+    }
   };
 
   return (
