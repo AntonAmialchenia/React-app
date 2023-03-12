@@ -6,6 +6,7 @@ import MySelect from './components/UI/select/MySelect';
 
 import './styles/App.css';
 import { Item } from './types/types';
+import MyInput from './components/UI/input/MyInput';
 
 function App() {
   const [posts, setPosts] = useState<Item[]>([
@@ -14,6 +15,20 @@ function App() {
     { id: 3, title: 'Typescript', body: 'Typescript - язык программирования' },
   ]);
   const [selectedSort, setSelectedSort] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const sortedPosts = useMemo(() => {
+    console.log('Отработала функция сортед постс');
+    if (selectedSort) {
+      return [...posts].sort((a, b) =>
+        a[selectedSort as Exclude<keyof Item, 'id'>].localeCompare(
+          b[selectedSort as Exclude<keyof Item, 'id'>],
+        ),
+      );
+    }
+    return posts;
+  }, [selectedSort, posts]);
+
   const createPost = (newPost: Item) => {
     setPosts([...posts, newPost]);
   };
@@ -24,30 +39,33 @@ function App() {
 
   const sortPosts = (sort: string) => {
     setSelectedSort(sort);
-    console.log(sort);
-
-    if (sort === 'title' || sort === 'body') {
-      setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
-      console.log(posts);
-    }
   };
 
   return (
     <div className="App">
       <PostForm create={createPost} />
       <div>
+        <MyInput
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Поиск..."
+        />
         <MySelect
           defaultValue="Сортировка"
+          value={selectedSort}
+          onChange={sortPosts}
           options={[
             { value: 'title', name: 'По названию' },
             { value: 'body', name: 'По описанию' },
           ]}
-          value={selectedSort}
-          onChange={sortPosts}
         />
       </div>
       {posts.length ? (
-        <PostList remove={removePost} posts={posts} title="Список постов 1" />
+        <PostList
+          remove={removePost}
+          posts={sortedPosts}
+          title="Список постов 1"
+        />
       ) : (
         <h1 style={{ textAlign: 'center' }}>Посты не найдены!</h1>
       )}
@@ -56,3 +74,6 @@ function App() {
 }
 
 export default App;
+function useMemo() {
+  throw new Error('Function not implemented.');
+}
