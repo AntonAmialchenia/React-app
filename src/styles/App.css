@@ -6,7 +6,8 @@
 
 #root {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .App {
@@ -17,7 +18,63 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
     padding: 15px;
     border: 2px solid teal;
     margin-top: 15px;
+    border-radius: 10px;
+}
+
+.post-enter {
+    transform: translateX(-350px);
+  }
+  .post-enter-active {
+    transform: translateX(0);
+    transition: all 500ms ease-in;
+  }
+  .post-exit {
+    opacity: 1;
+  }
+  .post-exit-active {
+    transform: translateX(-350px);
+    transition: all 500ms ease-in;
+  }
+
+.post__btns {
+  display: flex;
+  gap: 15px;
+}
+
+.page__wrapper {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+}
+
+.page {
+  padding: 10px;
+  border: 1px solid teal;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.page__current {
+  border: 2px solid orange;
+  box-shadow: 0 0 10px orange;
+  font-weight: bold;
+}
+
+.navbar {
+  height: 50px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  background-color: lightblue;
+}
+
+.navbar__links {
+  display: flex;
+  gap: 20px;
+  margin-left: auto;
 }

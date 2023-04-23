@@ -1,6 +1,6 @@
 import React, { SetStateAction, Dispatch, FC } from "react";
-import MyInput from "./UI/input/MyInput";
-import MySelect from "./UI/select/MySelect";
+import MyInput from "./UI/Input/MyInput";
+import MySelect from "./UI/Select/MySelect";
 
 interface PostFilterProps {
   filter: {

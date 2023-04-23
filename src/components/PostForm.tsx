@@ -1,22 +1,22 @@
-import React, { useState, ChangeEvent, MouseEvent } from 'react';
-import { Item } from '../types/types';
-import MyButton from './UI/button/MyButton';
-import MyInput from './UI/input/MyInput';
+import React, { useState, ChangeEvent, MouseEvent } from "react";
+import { Item } from "../types/types";
+import MyButton from "./UI/Button/MyButton";
+import MyInput from "./UI/Input/MyInput";
 
 interface PostFormProps {
-    create: (newPost:Item) => void
+  create: (newPost: Item) => void;
 }
 
-const PostForm: React.FC<PostFormProps> = ({create}) => {
-  const [post, setPost] = useState<Item>({ title: '', body: '' });
+const PostForm: React.FC<PostFormProps> = ({ create }) => {
+  const [post, setPost] = useState<Item>({ title: "", body: "" });
   const addNewPost = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     const newPost = { ...post, id: Date.now() };
-    create(newPost)
+    create(newPost);
     setPost({
-      title: '',
-      body: '',
+      title: "",
+      body: "",
     });
   };
 
@@ -29,7 +29,7 @@ const PostForm: React.FC<PostFormProps> = ({create}) => {
   };
 
   return (
-    <form style={{marginBottom:20}}>
+    <form style={{ marginBottom: 20 }}>
       <MyInput
         value={post.title}
         onChange={onChangeInputTitle}
